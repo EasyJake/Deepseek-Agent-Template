@@ -118,13 +118,33 @@ def run_agent(user_input):
     
     return results
 
-# Example usage
-if __name__ == "__main__":
-    user_query = "I have 10000 USD and I want to start trading. What should I do?"
-    results = run_agent(user_query)
+def main():
+    print("\nWelcome to the Crypto Trading Assistant!")
+    print("Available tools:")
+    print("- analyze_crypto_price: Analyzes current price and trends for a cryptocurrency")
+    print("- generate_trading_strategy: Generates trading strategy based on risk level and budget")
+    print("- calculate_portfolio_metrics: Calculates portfolio metrics for a wallet address")
     
-    print("\n[Final Results]")
-    for result in results:
-        print(f"\nTool: {result['tool']}")
-        print(f"Reason: {result['reason']}")
-        print(f"Result: {result['result']}")
+    while True:
+        print("\n" + "="*50)
+        user_query = input("\nEnter your query (or 'exit' to quit): ")
+        
+        if user_query.lower() in ['exit', 'quit', 'q']:
+            print("\nThank you for using the Crypto Trading Assistant. Goodbye!")
+            break
+            
+        results = run_agent(user_query)
+        
+        print("\n[Final Results]")
+        for result in results:
+            print(f"\nTool: {result['tool']}")
+            print(f"Reason: {result['reason']}")
+            print(f"Result: {result['result']}")
+        
+        continue_choice = input("\nWould you like to make another query? (y/n): ")
+        if continue_choice.lower() not in ['y', 'yes']:
+            print("\nThank you for using the Crypto Trading Assistant. Goodbye!")
+            break
+
+if __name__ == "__main__":
+    main()
